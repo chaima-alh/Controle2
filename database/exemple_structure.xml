@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<structure>
+  <filiere alias="GI" intitule="Génie Informatique">
+    <classe nom="GI-2A" niveau="2ème année">
+      <module code="WEB101" titre="Développement Web" niveau="2A">
+        <element code="PHP" titre="PHP &amp; MySQL"/>
+        <element code="HTML" titre="HTML/CSS/Bootstrap"/>
+      </module>
+      <module code="BD201" titre="Bases de données" niveau="2A">
+        <element code="SQL" titre="Langage SQL"/>
+      </module>
+    </classe>
+  </filiere>
+</structure>

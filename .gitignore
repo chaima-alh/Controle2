@@ -1,0 +1,29 @@
+/.idea/
+/.vscode/
+.DS_Store
+thumbs.db
+node_modules/
+vendor/
+composer.lock
+
+# Environment and secrets
+.env
+.env.*
+config/*.php
+
+# Logs and caches
+*.log
+storage/
+cache/
+
+# Uploaded files (do not track large or user files)
+/uploads/
+
+# Database/backup files
+*.sql
+
+# PHPStorm
+.phpstorm.meta.php
+
+# OS files
+desktop.ini
