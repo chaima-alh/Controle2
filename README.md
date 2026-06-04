@@ -1,46 +1,32 @@
 # Gestion des absences — ENSAH
 
-Application web PHP / MySQL pour la gestion des absences des étudiants (cahier des charges module Web).
+Application web PHP / MySQL pour la gestion des absences des étudiants (projet de cas d'étude).
 
-## Stack
+## Aperçu
 
-- **Back-end :** PHP 8+ (PDO)
-- **Front-end :** HTML, CSS, Bootstrap 5, JavaScript
-- **Base de données :** MySQL / MariaDB (XAMPP)
+- Langage : PHP 8+ (PDO)
+- Front : HTML, CSS, Bootstrap 5, JavaScript
+- BDD : MySQL / MariaDB (XAMPP)
 
-## Installation (XAMPP)
+Repo : https://github.com/chaima-alh/Controle2
 
-1. Démarrer **Apache** et **MySQL** dans XAMPP.
-2. Le projet est dans `C:\xampp\htdocs\gestions d'abs`.
-3. Ouvrir **phpMyAdmin** → importer dans l’ordre :
-   - `database/schema.sql`
-   - `database/seed.sql`
-4. Vérifier `config/database.php` (user `root`, mot de passe vide par défaut).
-5. Ouvrir dans le navigateur :  
-   `http://localhost/gestions%20d%27abs/install.php`  
-   Définir le mot de passe du compte **admin**.
-6. Se connecter : `http://localhost/gestions%20d%27abs/login.php`  
-   - Login : `admin`
+## Installation rapide (XAMPP)
 
-> Si l’URL ne fonctionne pas, adapter `base_url` dans `config/app.php` selon le nom du dossier dans `htdocs`.
+1. Démarrez **Apache** et **MySQL** via XAMPP.
+2. Placez le projet dans `C:\xampp\htdocs\gestions d'abs`.
+3. Créez la base et importez : `database/schema.sql` puis `database/seed.sql`.
+4. Vérifiez `config/database.php` (utilisateur/MDP).
+5. (Optionnel) Exécutez le script demo :
 
-## Modules implémentés (cahier des charges)
-
-| # | Module | Fonctionnalités |
-|---|--------|-----------------|
-| 1 | **Étudiants** | CRUD admin, recherche nom/phonétique/Massar, liste/impression/CSV par classe, stats par classe, corbeille, audit, fiche absences |
-| 2 | **Authentification** | Login, rôles (admin/enseignant/étudiant), enabled/locked, historique connexions |
-| 3 | **Structure pédagogique** | CRUD filières, classes, modules, éléments, associations, modules/classe, coordonnateur, import CSV |
-| 4 | **Comptes** | Création liée Massar/CIN, login auto, MDP aléatoire, reset, activer/désactiver, changer rôle, navigation, connexions |
-| 5 | **Absences** | Saisie enseignant (mobile), fiche, annulation avec seuil, permissions, étudiant (justifier, réclamations, profil), admin (saisie groupée Massar, justifications, réclamations) |
-
-## Comptes de démonstration
-
-Après import SQL, exécuter :
-
-```bash
+```powershell
 c:\xampp\php\php.exe database\install_demo.php
 ```
+
+6. Ouvrez `http://localhost/gestions%20d%27abs/login.php` et connectez-vous.
+
+Note : adaptez `base_url` dans `config/app.php` si nécessaire.
+
+## Comptes de démonstration
 
 | Rôle | Login | Mot de passe |
 |------|-------|--------------|
@@ -52,34 +38,39 @@ c:\xampp\php\php.exe database\install_demo.php
 
 ```
 config/           Configuration app et BDD
-database/         Schéma SQL et données initiales
-includes/         Auth, services, layout
-admin/            Interfaces administrateur
-enseignant/       Interfaces enseignant
-etudiant/         Interfaces étudiant
+database/         Schéma SQL, migrations et données d'exemple
+includes/         Classes d'accès, services et layout
+admin/            Interface administrateur
+enseignant/       Interface enseignant
+etudiant/         Interface étudiant
 assets/           CSS, JS, images
-uploads/          Photos et justificatifs
+uploads/          Fichiers utilisateurs (exclu du dépôt)
 ```
 
-## Compte administrateur
-
-Créé par `seed.sql` (login `admin`). Le mot de passe est défini via `install.php` (hash bcrypt). **Supprimez `install.php` en production.**
-
-## Sécurité
+## Sécurité & bonnes pratiques
 
 - Mots de passe : `password_hash()` / `password_verify()`
-- Requêtes préparées (PDO)
-- Contrôle d’accès par rôle (`Auth::requireRole`)
-- Soft delete étudiants + table `etudiant_audit`
-- **Captcha** sur login, **cookie « se souvenir »**, **blocage IP** (`admin/securite/ips.php`)
+- Requêtes préparées (PDO) pour éviter les injections SQL
+- Contrôles d'accès par rôle (`Auth`)
+- Supprimez `install.php` après configuration en production
 
-## Import structure (CSV / XML / Excel)
+## Contribuer
 
-- Admin → Structure → Import
-- Exemple XML : `database/exemple_structure.xml`
-
-## Migration v2 (si projet déjà installé)
+1. Forkez le repo et créez une branche : `feature/xxx`.
+2. Faites vos modifications, puis :
 
 ```bash
-c:\xampp\php\php.exe database\run_migration_v2.php
+git add .
+git commit -m "Add feature/fix"
+git push origin feature/xxx
 ```
+
+3. Ouvrez une Pull Request sur GitHub.
+
+## Licence
+
+Ce projet n'a pas de licence spécifiée — ajoutez-en une (ex. MIT) si vous souhaitez autoriser la réutilisation.
+
+---
+
+Pour toute aide supplémentaire (CI, licence, README en anglais), dites-moi ce que vous voulez ajouter.
