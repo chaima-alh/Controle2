@@ -1,0 +1,27 @@
+name: PHP CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Show PHP version
+        run: php -v
+
+      - name: PHP lint (all .php files)
+        run: |
+          set -e
+          # exclude vendor and uploads
+          find . -name "*.php" -not -path "./vendor/*" -not -path "./uploads/*" -print0 | xargs -0 -n1 php -l
